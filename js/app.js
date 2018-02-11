@@ -29,24 +29,20 @@ function animate(){
     var distance = $win.scrollTop();
     //console.log(distance);
     //move pinch hand
-   // distance = 1000;
+    //distance = 1500;
     if(distance < 1000){
         var left = (distanceToCenter) + (1100 - distance); 
         
         $left($greenHand, left + 90);
         
-
         $left($text1, left - 430);
-        //console.log(left - 430);
 
         var top = (midScreenY) + (500 - distance / 2);
         $top($greenHand, top );
         
-        
         $top($text1, top + 20);
-        //console.log(top + 20);
         
-    }else if(distance < 2600){
+    }else /*if(distance < 2600)*/{
         $left($greenHand, distanceToCenter + (distance - 810));
 
         $top($greenHand, (midScreenY) + (distance / 2 - 520) + 20)
@@ -56,24 +52,16 @@ function animate(){
         $top($text1, midScreenY - (distance - 1000) / 3 + 20);
     }
 
-    //move flat hand
-    if(distance < 1000){
-        //var left = distanceToCenter +
-        var top = (midScreenY) + (500 - distance / 2);
+    if(distance < 1500){
+        var top = (midScreenY) + (750 - distance / 2);
         $top($blueHand, top);
         $top($text2, top - 50);
 
-        var left = distanceToCenter - 50; 
-        $left($blueHand, left);
-        $left($text2, left - 280);
-    }else if(distance < 2600){
-        var overLimit = distance - 1000;
-
-        var top2 = (midScreenY) - (overLimit / 3);
-        $top($text2, top2 - 50);
-        
-        var top = (midScreenY) + (distance / 2 - 500);
-        $top($blueHand, top);
+        $left($blueHand, distanceToCenter - 50);
+        $left($text2, distanceToCenter - 330);
+    }else {
+        $top($text2, (midScreenY) - ((distance - 1000) / 3) + 117);
+        $top($blueHand, (midScreenY) + (distance / 2 - 750));
 
         var left = distanceToCenter - 50; 
         $left($blueHand, left);
