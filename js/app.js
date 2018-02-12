@@ -45,26 +45,36 @@ function animate(){
     var threeQuartersDistance = distance * 0.75;
     
     //move pinch hand
-    if(distance < 1000){
-        var left = midX + (1100 - distance); 
+    if(distance < 1800){
+        var left = midX + (1909 - distance); 
         
         $left($greenHand, left + 90);
-        
-        $left($text1, left - 430);
+        //console.log('green hand left ' + (left + 90));
 
-        var top = midY + (500 - halfDistance);
+        $left($text1, left - 440);
+        
+
+        var top = midY + (910 - halfDistance);
         $top($greenHand, top );
+        console.log('green hand top ' + (top));
+
+        console.log('text lef ' + (left - 440));
         
         $top($text1, top + 20);
+        console.log('text 1 top ' + (top + 20));
         
     }else {
-        $left($greenHand, midX + distance - 810);
+        $left($greenHand, midX + distance - 1600);
+        console.log('green hand left ' + (midX + distance - 1600));
 
-        $top($greenHand, midY + halfDistance - 500)
+        $top($greenHand, midY + halfDistance - 890);
+        console.log('green hand top ' + (midY + halfDistance - 890));
 
         $left($text1, midX - 330);
+        console.log('text left' + (midX - 330));
         
-        $top($text1, midY - thirdDistance + 353);
+        $top($text1, midY - thirdDistance + 635);
+        console.log('text top' + (midY - thirdDistance + 635));
     }
 
     //text 7
@@ -81,7 +91,7 @@ function animate(){
     }
 
     //push hand
-    if(distance < 1800){
+    if(distance < 1000){
         //var top = midY + (1550 - halfDistance);
         //$top($pushHand, top);
         //$top($text6, top - 50);
@@ -94,7 +104,7 @@ function animate(){
         //console.log('text left' + (midX + threeQuartersDistance - 1679));
     } else {
        
-        $top($text6, midY - thirdDistance + 610);
+        $top($text6, midY - thirdDistance + 330);
         //console.log('text top' + (midY - thirdDistance + 610));
         // $top($text6, midY - thirdDistance + 450);
         
