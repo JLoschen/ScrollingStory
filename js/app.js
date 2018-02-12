@@ -1,6 +1,6 @@
 var $win = $(window);
 var $greenHand, $blueHand, $orangeLeft, $orangeRight; 
-var $text1, $text2, $text3, $text4;
+var $text1, $text2, $text3, $text4, $text5;
 
 var height = 13042;
 var midX = 0;
@@ -21,6 +21,7 @@ $(function(){
     $text2 = $('#text2');
     $text3 = $('#text3');
     $text4 = $('#text4');
+    $text5 = $('#text5');
     setCenter();
 });
 
@@ -31,7 +32,8 @@ $win.on('scroll', function(){
 
 function animate(){
     var distance = $win.scrollTop();
-    //distance = 2800;
+    //distance = 2399;
+    //distance = 2400;
     var halfDistance = distance / 2;
 
     var thirdDistance = distance / 3;
@@ -49,14 +51,14 @@ function animate(){
         
         $top($text1, top + 20);
         
-    }else /*if(distance < 2600)*/{
-        $left($greenHand, midX + (distance - 810));
+    }else {
+        $left($greenHand, midX + distance - 810);
 
         $top($greenHand, midY + halfDistance - 500)
 
         $left($text1, midX - 330);
         
-        $top($text1, midY - (distance - 1000) / 3 + 20);
+        $top($text1, midY - thirdDistance + 353);
     }
 
     //blue hand
@@ -68,51 +70,64 @@ function animate(){
         $left($blueHand, midX - 50);
         $left($text2, midX - 330);
     }else {
-        $top($text2, midY - ((distance - 1000) / 3) + 117);
-        $top($blueHand, midY + (halfDistance - 750));
+        $top($text2, midY - thirdDistance + 450);
+        $top($blueHand, midY + halfDistance - 750);
 
         $left($blueHand, midX- 50);
         $left($text2, midX - 330);
     }
 
     //text 3
-    $top($text3, midY - ((distance - 1000) / 3) + 247);
+    $top($text3, midY - thirdDistance + 580);
     $left($text3, midX - 330);
 
-    if(1500 < distance && distance < 2300){
+    if(distance < 1500){
+        $opacity($text3, 0);
+    }else if(distance < 2300){
         var percent = (distance - 1500) / 800;
-        $text3.css('opacity', percent);
+        $opacity($text3, percent);
+    }else{
+        $opacity($text3,1);
     }
 
     //orange hands
-    if(distance < 2800){
-        var top = midY + 1100 - halfDistance;
+    if(distance < 2400){
+        var top = midY + 1030 - halfDistance;
         $top($orangeLeft, top);
         $top($orangeRight, top);
-        $top($text4, top + 80);
+        $top($text4, top + 84);
 
-        $left($orangeLeft, midX - 640);
-        $left($orangeRight, midX + 150);
+        $left($orangeLeft, midX - 617);
+        $left($orangeRight, midX + 117);
+
         $left($text4, midX - 170);
     }else {
-        var newTop = midY + (halfDistance - 1700);
+        var newTop = midY + halfDistance - 1370;
         $top($orangeLeft, newTop);
         $top($orangeRight, newTop);
 
-        $top($text4, midY - ((distance - 1000) / 3) + 381);
+        $top($text4, midY - thirdDistance + 714);
+
         //var overLimit = distance - 2800;
         //var overLimit = halfDistance - 1400;
         var overLimit = thirdDistance - 933;
-        $left($orangeLeft, midX - (640 + overLimit));
-        $left($orangeRight, midX + 150 + overLimit);
+        $left($orangeLeft, midX - (750 + overLimit));
+        $left($orangeRight, midX + 250 + overLimit);
         
         $left($text4, midX - 170);
     }
 
-    if(distance < 3100){
+    //text 3
+    $top($text5, midY - thirdDistance + 800);
+    $left($text5, midX - 330);
 
+    if(distance < 2400){
+        $opacity($text5, 0);
+    }else if(distance < 3200){
+        var percent = (distance - 2400) / 800;
+        $opacity($text5, percent);
     }else{
-
+        $opacity($text5, 1);
     }
 }
 
@@ -122,6 +137,10 @@ function $left(element, left1){
 
 function $top(element, top1){
     element.css('top', top1 + 'px');
+}
+
+function $opacity(element, opacity1){
+    element.css('opacity', opacity1);
 }
 
 $win.on('resize', function(){
