@@ -35,11 +35,13 @@ $win.on('scroll', function(){
 function animate(){
     var distance = $win.scrollTop();
     //distance = 2399;
-    //distance = 1500;
-    //distance = 2800;
+    //distance = 2999;
+    //distance = 3000;
     var halfDistance = distance / 2;
 
     var thirdDistance = distance / 3;
+
+    var threeQuartersDistance = distance * 0.75;
     
     //move pinch hand
     if(distance < 1000){
@@ -105,7 +107,7 @@ function animate(){
 
         $left($text4, midX - 170);
     }else {
-        var newTop = midY + halfDistance - 1370 + 30 + 30 + 30
+        var newTop = midY + halfDistance - 1370 + 30 + 30 + 30;
         $top($orangeLeft, newTop);
         $top($orangeRight, newTop);
 
@@ -133,41 +135,52 @@ function animate(){
         $opacity($text5, 1);
     }
 
-    // if(distance < 1500){
-    //     var top = midY + (/*750*/780 - halfDistance);
-    //     $top($blueHand, top);
-    //     $top($text2, top - 50);
+    //blue hand
+    if(distance < 3000){
+        var top = midY + (/*750*//*780*/1600 - halfDistance);
+        $top($blueHand, top);
+        $top($text2, top - 50);
+        // console.log('top ' + top);
+        // console.log('top text' + (top - 50));
 
-    //     $left($blueHand, midX - 50);
-    //     $left($text2, midX - 330);
-    // }else {
-    //     $top($text2, midY - thirdDistance + /*450*/480);
-    //     $top($blueHand, midY + halfDistance - /*750*/720);
+        $left($blueHand, midX - 50);
+        $left($text2, midX - 330);
+    }else {
+        $top($text2, midY - thirdDistance + /*450*/1050);
+        $top($blueHand, midY + halfDistance - /*750*/1400);
+        // console.log('hand top ' + (midY + halfDistance - /*750*/1400));
+        // console.log('text top ' + (midY - thirdDistance + /*450*/1050));
+    
 
-    //     $left($blueHand, midX- 50);
-    //     $left($text2, midX - 330);
-    // }
+        $left($blueHand, midX- 50);
+        $left($text2, midX - 330);
+    }
 
 
     //push hand
     //console.log(distance);
-    if(distance < 2800){
+    if(distance < /*2800*/1500){
         //var top = midY + (1550 - halfDistance);
         //$top($pushHand, top);
         //$top($text6, top - 50);
-        $top($text6, midY /*- 13*/+ 47); //13 = (2800/3) + 920
+        $top($text6, midY /*- 13*/- /*40*/10); //13 = (2800/3) + 920
+        //console.log('text top' + (midY /*- 13*/ - 40));
 
         //$left($pushHand, midX - 50);
-        $left($text6, midX + halfDistance - 1730); //1400 - x = -330
+        //$left($text6, midX + halfDistance - 1080); //1400 - x = -330
+        $left($text6, midX + threeQuartersDistance - 1454); //1400 - x = -330
+        //console.log('text left' + (midX + threeQuartersDistance - 1454));
     } else {
-        $top($text6, midY - thirdDistance + /*920*//*950*/980);
-        //console.log('text top' + (midY - thirdDistance + 920));
+        //$top($text6, midY - thirdDistance + /*920*//*950*/980);
+        $top($text6, midY - thirdDistance + /*920*//*950*//*460*/490);
+        //console.log('text top' + (midY - thirdDistance + 490));
         // $top($text6, midY - thirdDistance + 450);
         // $top($text4, midY - thirdDistance + 714);
         // $top($pushHand, midY + halfDistance - 750);
 
         // $left($pushHand, midX- 50);
         $left($text6, midX - 330);
+        //console.log('text left' + (midX - 330));
         //console.log('left ' + (midX - 330));
     }
 }
