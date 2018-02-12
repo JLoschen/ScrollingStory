@@ -1,6 +1,6 @@
 var $win = $(window);
 var $greenHand, $blueHand; 
-var $text1, $text2;
+var $text1, $text2, $text3;
 
 var height = 13042;
 var distanceToCenter = 0;
@@ -17,6 +17,7 @@ $(function(){
 
     $text1 = $('#text1');
     $text2 = $('#text2');
+    $text3 = $('#text3');
     setCenter();
 });
 
@@ -52,6 +53,7 @@ function animate(){
         $top($text1, midScreenY - (distance - 1000) / 3 + 20);
     }
 
+    //blue hand
     if(distance < 1500){
         var top = (midScreenY) + (750 - distance / 2);
         $top($blueHand, top);
@@ -67,6 +69,15 @@ function animate(){
         $left($blueHand, left);
         $left($text2, left - 280);
     }
+
+    //text 3
+    $top($text3, (midScreenY) - ((distance - 1000) / 3) + 247);
+    $left($text3, distanceToCenter - 330);
+
+    if(1500 < distance && distance < 2300){
+        var percent = (distance - 1500) / 800;
+        $text3.css('opacity', percent);
+    }
 }
 
 function $left(element, left1){
@@ -79,4 +90,5 @@ function $top(element, top1){
 
 $win.on('resize', function(){
     setCenter();
+    animate();
 });
