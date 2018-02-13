@@ -1,6 +1,6 @@
 var $win = $(window);
 var $greenHand, $blueHand, $orangeLeft, $orangeRight, $pushHand, $pointerHand, $palmHand; 
-var $text1, $text2, $text3, $text4, $text5, $text6, $text7, $text8, $text9;
+var $text1, $text2, $text3, $text4, $text5, $text6, $text7, $text8, $text9, $text10;
 
 var height = 13042;
 var midX = 0;
@@ -29,6 +29,7 @@ $(function(){
     $text7 = $('#text7');
     $text8 = $('#text8');
     $text9 = $('#text9');
+    $text10 = $('#text10');
     setCenter();
 });
 
@@ -168,12 +169,12 @@ function animate(){
 
     //pointer hand
     if(distance < 4200){
-        var left = midX + (4350 - distance);
+        var left = midX + (4450 - distance);
         $left($pointerHand, left);
-        $left($text8, left - 335);
+        $left($text8, left - 585);
         
         $top($pointerHand, midY);
-        $top($text8, midY + 45);
+        $top($text8, midY );
         
     }else {
         var left = midX + distance - 4049;
@@ -181,7 +182,7 @@ function animate(){
         $left($text8, midX - 184);
 
         $top($pointerHand, midY);
-        $top($text8, midY - thirdDistance + 1445);
+        $top($text8, midY - thirdDistance + 1350);
     }
 
     //palm hand
@@ -190,7 +191,7 @@ function animate(){
         $left($palmHand, left);
         $left($text9, left - 280);        
 
-        var top = midY + 2320 - halfDistance;
+        var top = midY + 2420 - halfDistance;
         
         $top($palmHand, top + 105);
         $top($text9, top);
@@ -199,8 +200,21 @@ function animate(){
         $left($palmHand, left);
         $left($text9, midX - 339);
 
-        $top($palmHand, midY + halfDistance - 2375);
-        $top($text9, midY - thirdDistance + 1520);
+        $top($palmHand, midY + halfDistance - 2275);
+        $top($text9, midY - thirdDistance + 1620);
+    }
+
+    //text 5
+    $left($text10, midX - 330);
+    $top($text10, midY - thirdDistance + 1780);
+
+    if(distance < 4500){
+        $opacity($text10, 0);
+    }else if(distance < 5500){
+        var percent = (distance - 4600) / 1000;
+        $opacity($text10, percent);
+    }else{
+        $opacity($text10, 1);
     }
 }
 
