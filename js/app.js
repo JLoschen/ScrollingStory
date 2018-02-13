@@ -44,6 +44,44 @@ function animate(){
 
     var threeQuartersDistance = distance * 0.75;
     
+    //push hand
+    if(distance < 1000){
+        //var top = midY + (1550 - halfDistance);
+        $top($pushHand, midY + 15);
+        //$top($text6, top - 50);
+        $top($text6, midY - 7); 
+        //console.log('text top ' + (midY - 7));
+
+        var percent = distance / 1000;
+        //$opacity($text6, distance / 1000);
+        $opacity($text6, percent);
+        $opacity($pushHand, percent);
+        //$left($pushHand, midX - 50);
+        //$left($text6, midX + halfDistance - 1080); //1400 - x = -330
+        //$left($text6, midX + threeQuartersDistance - 1079); //1400 - x = -330
+        $left($text6, midX + distance - 1329); 
+        $left($pushHand, midX + distance - 2145); 
+        //console.log('text left' + (midX + distance - 1329));
+    } else {
+       
+        $top($text6, midY - thirdDistance + 330);
+        //console.log('text top' + (midY - thirdDistance + 330));
+        // $top($text6, midY - thirdDistance + 450);
+        
+        $opacity($text6, 1);
+        $opacity($pushHand, 1);
+        // $top($pushHand, midY + halfDistance - 750);
+
+        $top($pushHand, midY + 15);
+        // $left($pushHand, midX- 50);
+        $left($text6, midX - 330);
+
+        var overLimit = 1000 - distance;
+        //$left($pushHand, midX + overLimit - 2145); 
+        $left($pushHand, (midX + 1000 - 2145) + overLimit); 
+        //console.log('text left ' + (midX - 330));
+    }
+
     //move pinch hand
     if(distance < 1800){
         var left = midX + (1909 - distance); 
@@ -88,32 +126,6 @@ function animate(){
         $opacity($text7, percent);
     }else{
         $opacity($text7,1);
-    }
-
-    //push hand
-    if(distance < 1000){
-        //var top = midY + (1550 - halfDistance);
-        //$top($pushHand, top);
-        //$top($text6, top - 50);
-        $top($text6, midY - 7); 
-        console.log('text top ' + (midY - 7));
-        //console.log('text top' + (midY + 10));
-
-        //$left($pushHand, midX - 50);
-        //$left($text6, midX + halfDistance - 1080); //1400 - x = -330
-        $left($text6, midX + threeQuartersDistance - 1079); //1400 - x = -330
-        console.log('text left' + (midX + threeQuartersDistance - 1079));
-    } else {
-       
-        $top($text6, midY - thirdDistance + 330);
-        console.log('text top' + (midY - thirdDistance + 330));
-        // $top($text6, midY - thirdDistance + 450);
-        
-        // $top($pushHand, midY + halfDistance - 750);
-
-        // $left($pushHand, midX- 50);
-        $left($text6, midX - 330);
-        console.log('text left ' + (midX - 330));
     }
 
     //text 3
