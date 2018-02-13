@@ -1,6 +1,6 @@
 var $win = $(window);
-var $greenHand, $blueHand, $orangeLeft, $orangeRight, $pushHand, $pointerHand; 
-var $text1, $text2, $text3, $text4, $text5, $text6, $text7, $text8;
+var $greenHand, $blueHand, $orangeLeft, $orangeRight, $pushHand, $pointerHand, $palmHand; 
+var $text1, $text2, $text3, $text4, $text5, $text6, $text7, $text8, $text9;
 
 var height = 13042;
 var midX = 0;
@@ -18,6 +18,7 @@ $(function(){
     $orangeRight = $('#orange-right');
     $pushHand = $('#push-hand');
     $pointerHand = $('#pointer-hand');
+    $palmHand = $('#palm-hand');
 
     $text1 = $('#text1');
     $text2 = $('#text2');
@@ -27,6 +28,7 @@ $(function(){
     $text6 = $('#text6');
     $text7 = $('#text7');
     $text8 = $('#text8');
+    $text9 = $('#text9');
     setCenter();
 });
 
@@ -39,7 +41,7 @@ function animate(){
     var distance = $win.scrollTop();
     //distance = 2399;
     //distance = 2999;
-    //distance = 4200;
+    //distance = 4800;
     var halfDistance = distance / 2;
 
     var thirdDistance = distance / 3;
@@ -169,10 +171,10 @@ function animate(){
         var left = midX + (4350 - distance);
         $left($pointerHand, left);
         $left($text8, left - 335);
-
-        //var top = midY + (1800 - halfDistance);
+        
         $top($pointerHand, midY);
         $top($text8, midY + 45);
+        
     }else {
         var left = midX + distance - 4049;
         $left($pointerHand, left);
@@ -181,10 +183,34 @@ function animate(){
         $top($pointerHand, midY);
         $top($text8, midY - thirdDistance + 1445);
     }
+
+    //palm hand
+    if(distance < 4800){
+        var left = midX + (2340 - halfDistance);
+        $left($palmHand, left);
+        $left($text9, left - 280);        
+
+        var top = midY + 2320 - halfDistance;
+        
+        $top($palmHand, top + 105);
+        $top($text9, top);
+    }else {
+        var left = midX + halfDistance - 2459;
+        $left($palmHand, left);
+        $left($text9, midX - 339);
+
+        $top($palmHand, midY + halfDistance - 2375);
+        $top($text9, midY - thirdDistance + 1520);
+    }
 }
 
 function $left(element, left1){
-    element.css('left', left1 + 'px');
+    //if(element){
+        element.css('left', left1 + 'px');
+    //}else{
+    //    console.log('undefined!');
+    //}
+        
 }
 
 function $top(element, top1){
