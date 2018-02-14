@@ -7,8 +7,10 @@ var $text1, $text2, $text3, $text4, $text5, $text6,
 var height = 13042;
 var midX = 0;
 var midY = 0;
-var chainText, chain, pointerHand, pointerText, pushHand;
-var text12, text10, text5, text3, text7;
+var chainText, chain, pointerHand, pointerText, pushHand, pinchHand, blueHand, 
+    palmHand, orangeLeft, orangeRight;
+var text12, text10, text5, text3, text7, pushText, 
+    pinchText, blueText, palmText, orangeText;
 
 function setCenter(){
     midX = $win.width() / 2;
@@ -42,35 +44,47 @@ $(function(){
     $text13 = $('#text13');
     setCenter();
 
-    //push hand
-    // if(distance < 1000){
-    //     $left($text6, midX + distance - 1329); 
-    //     $left($pushHand, midX + distance - 2145); 
+    //constructor(breakPoint, xSpeed1, ySpeed1, xSpeed2, ySpeed2, xOffset, yOffset, xOffset, yOffset)
+    //constructor(startFade, endFade, yOffset, xOffset, theObject){
+    //orange hands
+    // if(distance < 2400){
+    //     $left($orangeLeft, midX - 617);
+    //     $left($orangeRight, midX + 117);
+    //     $left($text4, midX - 170);
 
-    //     var percent = distance / 1000;
-    //     $opacity($text6, percent);
-    //     $opacity($pushHand, percent);
-        
-    //     $top($pushHand, midY + 15);
-    //     $top($text6, midY - 7); 
-    // } else {
-    //     $left($text6, midX - 330);
-    //     $left($pushHand, (midX - 145) - distance); 
+    //     var top = midY + 1280 - halfDistance;
+    //     $top($orangeLeft, top);
+    //     $top($orangeRight, top);
+    //     $top($text4, top + 84);
+    // }else {
+    //     //var overLimit = distance - 2800;
+    //     //var overLimit = halfDistance - 1400;
+    //     var overLimit = thirdDistance - 933;
+    //     $left($orangeLeft, midX - (750 + overLimit));
+    //     $left($orangeRight, midX + 250 + overLimit);
+    //     $left($text4, midX - 170);
 
-    //     $opacity($text6, 1);
-    //     $opacity($pushHand, 1);
-
-    //     $top($text6, midY - thirdDistance + 330);
-    //     $top($pushHand, midY + 15);        
+    //     var newTop = midY + halfDistance - 1370 + 30 + 20 + 200;
+    //     $top($orangeLeft, newTop);
+    //     $top($orangeRight, newTop);
+    //     $top($text4, midY - thirdDistance + 964);
     // }
-        //constructor(breakPoint, xSpeed1, ySpeed1, xSpeed2, ySpeed2, xOffset, yOffset, xOffset, yOffset)
-
-        //constructor(startFade, endFade, yOffset, xOffset, theObject){
     chainText = new ScrollObject(5900, -1, -0.333, 0, -0.333, 5700, 2060, -200 , 2060, $('#text11'));
     chain = new ScrollObject(5900, -1, -0.333, -1, -0.333, 3790, 2035, 3791, 2035, $chain);
     pointerHand = new ScrollObject(4200, -1, -0.333, 1, -0.333, 4470, 1415, /*3791*/ -3929, /*2035*/1416, $pointerHand);
     pointerText = new ScrollObject(4200, -1, -0.333, 0, -0.333, 3869, 1400, -330, 1400, $text8);
     pushHand = new ScrollObject(1000, 1, 0, -1, 0, -2240, -15, -240, -15, $pushHand);
+    pushText = new ScrollObject(1000, 1, 0, 0, -0.333, -1325, 22, -325, 355, $text6);
+    pinchHand = new ScrollObject(1800, -1, -0.5, 1, 0.5, 2060, 850, -1540, -950, $greenHand);
+    pinchText = new ScrollObject(1800, -1, -0.5, 0, -0.333, 1460, 930, -340, 629, $text1);
+    blueHand = new ScrollObject(3000, 0, -0.5, 0, 0.333, -100, 1740, -100, -759, $blueHand);
+    blueText = new ScrollObject(3000, 0, -0.5, 0, -0.333, -300, 1750, -300, 1249, $text2);
+    palmHand = new ScrollObject(4800, -0.5, -0.5, 0.5, 0.5, 2270, 2500, -2530, -2300, $palmHand);
+    palmText = new ScrollObject(4800, -0.5, -0.5, 0, -0.333, 2070, 2420, -330, 1618.4, $text9);
+    orangeLeft = new ScrollObject(2400, 0, -0.5, -0.333, 0.5, -630, 1290, 169, -1110, $orangeLeft);
+    orangeRight = new ScrollObject(2400, 0, -0.5, 0.333, 0.5, 140, 1290, -659, -1110, $orangeRight);
+    orangeText = new ScrollObject(2400, 0, -0.5, 0, -0.333, -160, 1368, -160, 967, $text4);
+
     text12 = new FadeObject(5600, 6800, 330, 2180, $text12);
     text10 = new FadeObject(4500, 5500, 330, 1780, $text10);
     text5 = new FadeObject(2100, 3300, 330, 1080, $text5);
@@ -89,127 +103,78 @@ function getOffset(distance, speed1, speed2, offset1){
 
 function animate(){
     var distance = $win.scrollTop();
-    //distance = 4200;
-    //distance = 1000;
+    //distance = 4799;
+    // distance = 2399;
     
-    // if(pushHand){
-    //     console.log('post x: ' + pushHand.getOffsetPostX());
-    //     console.log('post Y: ' + pushHand.getOffsetPostY());
+    //  if(orangeText){
+    //      console.log('post x: ' + orangeText.getOffsetPostX());
+    //      console.log('post Y: ' + orangeText.getOffsetPostY());
+
+    //     //console.log('pre x: ' + blueHand.getOffsetPreX());
+    //     //console.log('pre Y: ' + blueHand.getOffsetPreY());
     // }
-    
-    
-    //distance = 1000;
 
     var halfDistance = distance / 2;
     var thirdDistance = distance / 3;
     var threeQuartersDistance = distance * 0.75;
+
+    //orange hands
+    if(distance < 2400){
+        //$left($orangeLeft, midX - 617);
+        //$left($orangeRight, midX + 117);
+        //$left($text4, midX - 170);
+
+        var top = midY + 1280 - halfDistance;
+        //$top($orangeLeft, top);
+        //$top($orangeRight, top);
+        //$top($text4, top + 84);
+    }else {
+        //var overLimit = distance - 2800;
+        //var overLimit = halfDistance - 1400;
+        var overLimit = thirdDistance - 933;
+        //$left($orangeLeft, midX - (750 + overLimit));
+        //$left($orangeRight, midX + 250 + overLimit);
+        //$left($text4, midX - 170);
+
+        var newTop = midY + halfDistance - 1370 + 30 + 20 + 200;
+        //$top($orangeLeft, newTop);
+        //$top($orangeRight, newTop);
+        //$top($text4, midY - thirdDistance + 964);
+    }
+    orangeText.update(distance);
+    orangeLeft.update(distance);
+    orangeRight.update(distance);
     
     //push hand
     if(distance < 1000){
-        $left($text6, midX + distance - 1329); 
-        //$left($pushHand, midX + distance - 2145); 
-
         var percent = distance / 1000;
         $opacity($text6, percent);
-        //$opacity($pushHand, percent);
-        
-        //$top($pushHand, midY + 15);
-        $top($text6, midY - 7); 
+        $opacity($pushHand, percent);
     } else {
-        $left($text6, midX - 330);
-        $left($pushHand, (midX - 145) - distance); 
-
         $opacity($text6, 1);
         $opacity($pushHand, 1);
-
-        $top($text6, midY - thirdDistance + 330);
-        $top($pushHand, midY + 15);        
     }
     pushHand.update(distance);
+    pushText.update(distance);
 
-    //move pinch hand
-    if(distance < 1800){
-        var left = midX + (1999 - distance);
-        $left($greenHand, left);
-        $left($text1, left - 530);
-
-        var top = midY + (910 - halfDistance);
-        $top($greenHand, top);
-        $top($text1, top + 20);
-    }else {
-        $left($greenHand, midX + distance - 1600);
-        $left($text1, midX - 330);
-        
-        $top($greenHand, midY + halfDistance - 890);
-        $top($text1, midY - thirdDistance + 635);
-    }
+    pinchText.update(distance);
+    pinchHand.update(distance);
 
     text7.update(distance);
 
     text3.update(distance);
 
-    //orange hands
-    if(distance < 2400){
-        $left($orangeLeft, midX - 617);
-        $left($orangeRight, midX + 117);
-        $left($text4, midX - 170);
-
-        var top = midY + 1280 - halfDistance;
-        $top($orangeLeft, top);
-        $top($orangeRight, top);
-        $top($text4, top + 84);
-    }else {
-        //var overLimit = distance - 2800;
-        //var overLimit = halfDistance - 1400;
-        var overLimit = thirdDistance - 933;
-        $left($orangeLeft, midX - (750 + overLimit));
-        $left($orangeRight, midX + 250 + overLimit);
-        $left($text4, midX - 170);
-
-        var newTop = midY + halfDistance - 1370 + 30 + 20 + 200;
-        $top($orangeLeft, newTop);
-        $top($orangeRight, newTop);
-        $top($text4, midY - thirdDistance + 964);
-    }
+    
     text5.update(distance);
 
-    //blue hand
-    if(distance < 3000){
-        $left($blueHand, midX - 50);
-        $left($text2, midX - 330);
-
-        var top = midY + (1800 - halfDistance);
-        $top($blueHand, top);
-        $top($text2, top - 50);
-    }else {
-        $left($blueHand, midX- 50);
-        $left($text2, midX - 330);
-
-        $top($text2, midY - thirdDistance + 1250);
-        $top($blueHand, midY + halfDistance - 1200);
-    }
+    blueText.update(distance);
+    blueHand.update(distance);
 
     pointerHand.update(distance);
     pointerText.update(distance);
 
-    //palm hand
-    if(distance < 4800){
-        var left = midX + (2340 - halfDistance);
-        $left($palmHand, left);
-        $left($text9, left - 280);        
-
-        var top = midY + 2420 - halfDistance;
-        
-        $top($palmHand, top + 105);
-        $top($text9, top);
-    }else {
-        var left = midX + halfDistance - 2459;
-        $left($palmHand, left);
-        $left($text9, midX - 339);
-
-        $top($palmHand, midY + halfDistance - 2275);
-        $top($text9, midY - thirdDistance + 1620);
-    }
+    palmText.update(distance);
+    palmHand.update(distance);
     text10.update(distance);
 
     chain.update(distance);
@@ -255,7 +220,7 @@ class ScrollObject{
     
     update(scrollDistance){
         if(scrollDistance < this.breakPoint){
-            $left(this.theObject,midX + this.xSpeed1 * scrollDistance + this.xOffset);
+            $left(this.theObject, midX + this.xSpeed1 * scrollDistance + this.xOffset);
             $top(this.theObject, midY + this.ySpeed1 * scrollDistance + this.yOffset);
 
             // if(this.theObject === $pushHand){
@@ -285,7 +250,7 @@ class ScrollObject{
         return this.breakPoint * (this.ySpeed1 - this.ySpeed2) + this.yOffset;
     }
 
-    getOffsetPreX(){
+    getOffsetPreY(){
         return this.breakPoint * (this.ySpeed2 - this.ySpeed1) + this.yOffset2;
     }
 }
@@ -328,20 +293,28 @@ class FadeObject{
 }
 
 function $left(element, left1){
-    //if(element){
+    if(element){
         element.css('left', left1 + 'px');
-    //}else{
-    //    console.log('undefined!');
-    //}
-        
+    }else{
+        console.log('undefined!');
+    }
 }
 
 function $top(element, top1){
-    element.css('top', top1 + 'px');
+    if(element){
+        element.css('top', top1 + 'px');
+    }else{
+        console.log('undefined!');
+    }
+    
 }
 
 function $opacity(element, opacity1){
-    element.css('opacity', opacity1);
+    if(element){
+        element.css('opacity', opacity1);
+    }else{
+        console.log('undefined!');
+    }
 }
 
 
