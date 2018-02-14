@@ -2,7 +2,7 @@ var $win = $(window);
 var $greenHand, $blueHand, $orangeLeft, $orangeRight, 
     $pushHand, $pointerHand, $palmHand, $chain; 
 var $text1, $text2, $text3, $text4, $text5, $text6,
-     $text7, $text8, $text9, $text10, $text11;
+     $text7, $text8, $text9, $text10, $text11, $text12;
 
 var height = 13042;
 var midX = 0;
@@ -34,6 +34,7 @@ $(function(){
     $text9 = $('#text9');
     $text10 = $('#text10');
     $text11 = $('#text11');
+    $text12 = $('#text12');
     setCenter();
 });
 
@@ -206,14 +207,14 @@ function animate(){
         $top($text9, midY - thirdDistance + 1620);
     }
 
-    //text 5
+    //text 10
     $left($text10, midX - 330);
     $top($text10, midY - thirdDistance + 1780);
 
     if(distance < 4500){
         $opacity($text10, 0);
     }else if(distance < 5500){
-        var percent = (distance - 4600) / 1000;
+        var percent = (distance - 4500) / 1000;
         $opacity($text10, percent);
     }else{
         $opacity($text10, 1);
@@ -234,6 +235,19 @@ function animate(){
 
         $top($chain, (midY + 2036 - thirdDistance));
         $top($text11, midY - thirdDistance + 2056);
+    }
+
+    //text 12
+    $left($text12, midX - 330);
+    $top($text12, midY - thirdDistance + 2180);
+
+    if(distance < 5600){
+        $opacity($text12, 0);
+    }else if(distance < 6800){
+        var percent = (distance - 5600) / 1200;
+        $opacity($text12, percent);
+    }else{
+        $opacity($text12, 1);
     }
 }
 
