@@ -1,16 +1,16 @@
 var $win = $(window);
-var $greenHand, $blueHand, $orangeLeft, $orangeRight, 
+var $greenHand, $blueHand, $orangeLeft, $orangeRight, $stone,
     $pushHand, $pointerHand, $palmHand, $chain, $leftPalm, $rightPalm; 
-var $text1, $text2, $text3, $text4, $text5, $text6,
+var $text1, $text2, $text3, $text4, $text5, $text6, $text14,
      $text7, $text8, $text9, $text10, $text11, $text12, $text13;
 
 var height = 13042;
 var midX = 0;
 var midY = 0;
 var chainText, chain, pointerHand, pointerText, pushHand, pinchHand, blueHand, 
-    palmHand, orangeLeft, orangeRight;
-var text12, text10, text5, text3, text7, pushText, 
-    pinchText, blueText, palmText, orangeText;
+    palmHand, orangeLeft, orangeRight, stone;
+var text12, text10, text5, text3, text7, pushText, text14, 
+    pinchText, blueText, palmText, orangeText, stoneText;
 
 function setCenter(){
     midX = $win.width() / 2;
@@ -28,6 +28,7 @@ $(function(){
     $chain = $('#chain');
     $leftPalm = $('#left-palm');
     $rightPalm = $('#right-palm');
+    $stone = $('#stone');
 
     $text1 = $('#text1');
     $text2 = $('#text2');
@@ -42,6 +43,7 @@ $(function(){
     //$text11 = $('#text11');
     $text12 = $('#text12');
     $text13 = $('#text13');
+    $text14 = $('#text14');
     setCenter();
 
     //constructor(breakPoint, xSpeed1, ySpeed1, xSpeed2, ySpeed2, xOffset, yOffset, xOffset, yOffset)
@@ -84,12 +86,16 @@ $(function(){
     orangeLeft = new ScrollObject(2400, 0, -0.5, -0.333, 0.5, -630, 1290, 169, -1110, $orangeLeft);
     orangeRight = new ScrollObject(2400, 0, -0.5, 0.333, 0.5, 140, 1290, -659, -1110, $orangeRight);
     orangeText = new ScrollObject(2400, 0, -0.5, 0, -0.333, -160, 1368, -160, 967, $text4);
+    //stoneText = new ScrollObject(5)
 
+    text14 = new FadeObject(6800, 8000, 330, 2680, $text14);
     text12 = new FadeObject(5600, 6800, 330, 2180, $text12);
     text10 = new FadeObject(4500, 5500, 330, 1780, $text10);
     text5 = new FadeObject(2100, 3300, 330, 1080, $text5);
     text3 = new FadeObject(1300, 2300, 330, 770, $text3);
     text7 = new FadeObject(1450, 2300, 330, 510, $text7);
+    stoneText = new FadeObject(0, 100, 300, 2500, $text13); 
+    stone = new FadeObject(0, 100, 445, 2350, $stone); 
 });
 
 // https://www.youtube.com/watch?v=nhHqiGCG10E
@@ -104,7 +110,7 @@ function getOffset(distance, speed1, speed2, offset1){
 function animate(){
     var distance = $win.scrollTop();
     //distance = 4799;
-    // distance = 2399;
+    // distance = 2399; 
     
     //  if(orangeText){
     //      console.log('post x: ' + orangeText.getOffsetPostX());
@@ -118,29 +124,6 @@ function animate(){
     var thirdDistance = distance / 3;
     var threeQuartersDistance = distance * 0.75;
 
-    //orange hands
-    if(distance < 2400){
-        //$left($orangeLeft, midX - 617);
-        //$left($orangeRight, midX + 117);
-        //$left($text4, midX - 170);
-
-        var top = midY + 1280 - halfDistance;
-        //$top($orangeLeft, top);
-        //$top($orangeRight, top);
-        //$top($text4, top + 84);
-    }else {
-        //var overLimit = distance - 2800;
-        //var overLimit = halfDistance - 1400;
-        var overLimit = thirdDistance - 933;
-        //$left($orangeLeft, midX - (750 + overLimit));
-        //$left($orangeRight, midX + 250 + overLimit);
-        //$left($text4, midX - 170);
-
-        var newTop = midY + halfDistance - 1370 + 30 + 20 + 200;
-        //$top($orangeLeft, newTop);
-        //$top($orangeRight, newTop);
-        //$top($text4, midY - thirdDistance + 964);
-    }
     orangeText.update(distance);
     orangeLeft.update(distance);
     orangeRight.update(distance);
@@ -164,7 +147,6 @@ function animate(){
 
     text3.update(distance);
 
-    
     text5.update(distance);
 
     blueText.update(distance);
@@ -181,8 +163,32 @@ function animate(){
     chainText.update(distance);
 
     text12.update(distance);
+    if(text14){
+        text14.update(distance);
+    }else{
+        console.log('wtf');
+    }
+    
 
-    //double flat hand
+    stoneText.update(distance);
+    stone.update(distance);
+
+    //stone
+    if(distance < 6500){
+        $source($stone, 'stone_1b.png');
+    }else if(distance < 6800){
+        $source($stone, 'stone_2b.png');
+    }else if(distance < 7100){
+        $source($stone, 'stone_3b.png');
+    }else if(distance < 7400){
+        $source($stone, 'stone_4b.png');
+    }else if(distance < 7700){
+        $source($stone, 'stone_5b.png');
+    }else if(distance < 8000){
+        $source($stone, 'stone_6b.png');
+    }
+
+    //double flat hand  dsdf
     // if(distance < 7000){
     //     var left = midX + (3780 - distance);
     //     $left($rightPalm, left);
@@ -306,12 +312,27 @@ function $top(element, top1){
     }else{
         console.log('undefined!');
     }
-    
 }
 
 function $opacity(element, opacity1){
     if(element){
         element.css('opacity', opacity1);
+    }else{
+        console.log('undefined!');
+    }
+}
+
+function $rotate(element, degrees){
+    if(element){
+        element.css('transform', 'rotate('+ degrees+')');
+    }else{
+        console.log('undefined!');
+    }
+}
+
+function $source(element, newSource){
+    if(element){
+        element.attr('src', 'img/Hands/'+newSource);
     }else{
         console.log('undefined!');
     }
