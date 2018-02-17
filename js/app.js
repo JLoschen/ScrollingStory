@@ -1,14 +1,14 @@
 var $win = $(window);
-var $greenHand, $blueHand, $orangeLeft, $orangeRight, $stone,
+var $greenHand, $blueHand, $orangeLeft, $orangeRight, $stone, /*$rotateHand,$purpleHand,*/ $doubleHandLeft,
     $pushHand, $pointerHand, $palmHand, $chain, $leftPalm, $rightPalm; 
-var $text1, $text2, $text3, $text4, $text5, $text6, $text14,
+var $text1, $text2, $text3, $text4, $text5, $text6, $text14, /*$rotateText,*/ $doubleHandText,
      $text7, $text8, $text9, $text10, $text11, $text12, $text13;
 
 var height = 13042;
 var midX = 0;
 var midY = 0;
 var chainText, chain, pointerHand, pointerText, pushHand, pinchHand, blueHand, 
-    palmHand, orangeLeft, orangeRight, stone;
+    palmHand, orangeLeft, orangeRight, stone, purpleHand, doubleHandLeft, doubleHandText;
 var text12, text10, text5, text3, text7, pushText, text14, 
     pinchText, blueText, palmText, orangeText, stoneText;
 
@@ -29,6 +29,9 @@ $(function(){
     $leftPalm = $('#left-palm');
     $rightPalm = $('#right-palm');
     $stone = $('#stone');
+    //$rotateHand = $('#rotate-hand');
+    $purpleHand = $('#purple-hand');
+    $doubleHandLeft = $('#double-hand-left');
 
     $text1 = $('#text1');
     $text2 = $('#text2');
@@ -44,6 +47,8 @@ $(function(){
     $text12 = $('#text12');
     $text13 = $('#text13');
     $text14 = $('#text14');
+    //$rotateText = $('#text15');
+    $doubleHandText = $('#text15');
     setCenter();
 
     //constructor(breakPoint, xSpeed1, ySpeed1, xSpeed2, ySpeed2, xOffset, yOffset, xOffset, yOffset)
@@ -86,7 +91,16 @@ $(function(){
     orangeLeft = new ScrollObject(2400, 0, -0.5, -0.333, 0.5, -630, 1290, 169, -1110, $orangeLeft);
     orangeRight = new ScrollObject(2400, 0, -0.5, 0.333, 0.5, 140, 1290, -659, -1110, $orangeRight);
     orangeText = new ScrollObject(2400, 0, -0.5, 0, -0.333, -160, 1368, -160, 967, $text4);
+    purpleHand = new ScrollObject(7500, -0.5, -0.5, -0.5, 0.5, 3790, 4110, 3790, -3390, $purpleHand);
+    doubleHandText = new ScrollObject(7500, -0.5, -0.5, 0, -0.333, 3430, 4080, -320, 2827, $doubleHandText);
+    doubleHandLeft = new ScrollObject(7500, -0.5, -0.5, -0.5, 0.5, 3490, 4110, 3490, -3390, $doubleHandLeft);
+
     //stoneText = new ScrollObject(5)
+    //constructor(breakPoint, xSpeed, ySpeed, xOffset, yOffset, theObject){
+    //constructor(breakPoint, xSpeed, ySpeed, xOffset, yOffset, spinRate, xSpeed2, ySpeed2, xOffset2, yOffset2,theObject){
+    //rotateText = new RotateObject(7500, 0, -0.333, 320, 2860, 7, 0, -0.333, -320, 2860, $rotateText);
+    //rotateHand = new RotateObject(7500, 0, -0.333, 70, 3100, 7, 0, 0.333, 70, -7800, $rotateHand);
+    //rotateHand = new RotateObject(7500, 0, -0.333, 320, 2860, 7, 0, -0.333, -320, 2860, $rotateHand);
 
     text14 = new FadeObject(6800, 8000, 330, 2680, $text14);
     text12 = new FadeObject(5600, 6800, 330, 2180, $text12);
@@ -109,12 +123,17 @@ function getOffset(distance, speed1, speed2, offset1){
 
 function animate(){
     var distance = $win.scrollTop();
-    //distance = 4799;
+    // if(distance % 2 === 0){
+         //distance = 7499;    
+    // }else{
+    //     distance = 6300;
+    // }
+    
     // distance = 2399; 
     
-    //  if(orangeText){
-    //      console.log('post x: ' + orangeText.getOffsetPostX());
-    //      console.log('post Y: ' + orangeText.getOffsetPostY());
+    //  if(doubleHandText){
+    //      console.log('post x: ' + doubleHandText.getOffsetPostX());
+    //      console.log('post Y: ' + doubleHandText.getOffsetPostY());
 
     //     //console.log('pre x: ' + blueHand.getOffsetPreX());
     //     //console.log('pre Y: ' + blueHand.getOffsetPreY());
@@ -163,13 +182,8 @@ function animate(){
     chainText.update(distance);
 
     text12.update(distance);
-    if(text14){
-        text14.update(distance);
-    }else{
-        console.log('wtf');
-    }
+    text14.update(distance);
     
-
     stoneText.update(distance);
     stone.update(distance);
 
@@ -187,6 +201,12 @@ function animate(){
     }else if(distance < 8000){
         $source($stone, 'stone_6b.png');
     }
+
+    purpleHand.update(distance);
+    doubleHandText.update(distance);
+    doubleHandLeft.update(distance);
+    //rotateText.update(distance);
+    //rotateHand.update(distance);
 
     //double flat hand  dsdf
     // if(distance < 7000){
@@ -210,6 +230,41 @@ function animate(){
     // }
 }
 
+class RotateObject{
+    constructor(breakPoint, xSpeed, ySpeed, xOffset, yOffset, spinRate, xSpeed2, ySpeed2, xOffset2, yOffset2,theObject){
+        this.breakPoint = breakPoint;
+        this.xOffset = xOffset;
+        this.yOffset = yOffset;
+        this.theObject = theObject;
+        this.xSpeed = xSpeed;
+        this.ySpeed = ySpeed;
+        this.theObject = theObject;
+        this.spinRate = spinRate;
+        this.xSpeed2 = xSpeed2;
+        this.ySpeed2 = ySpeed2;
+        this.xOffset2 = xOffset2;
+        this.yOffset2 = yOffset2;
+    }
+
+    update(scrollDistance){
+        var degrees = scrollDistance / this.spinRate;
+        //var third = scrollDistance / 3;
+
+        if(scrollDistance < this.breakPoint){
+            // $left(this.theObject, midX - this.xOffset);
+            // $top(this.theObject, midY - third + this.yOffset);
+            $left(this.theObject, midX + this.xSpeed * scrollDistance + this.xOffset);
+            $top(this.theObject, midY + this.ySpeed * scrollDistance + this.yOffset);
+            $rotate(this.theObject, degrees);
+        }else{
+            // $left(this.theObject, midX - this.xOffset);
+            // $top(this.theObject, midY - third + this.yOffset);
+            $left(this.theObject, midX + this.xSpeed2 * scrollDistance + this.xOffset2);
+            $top(this.theObject, midY + this.ySpeed2 * scrollDistance + this.yOffset2);
+        }
+    }
+}
+
 class ScrollObject{
     constructor(breakPoint, xSpeed1, ySpeed1, xSpeed2, ySpeed2, xOffset, yOffset, xOffset2, yOffset2, theObject){
         this.breakPoint = breakPoint;
@@ -229,7 +284,7 @@ class ScrollObject{
             $left(this.theObject, midX + this.xSpeed1 * scrollDistance + this.xOffset);
             $top(this.theObject, midY + this.ySpeed1 * scrollDistance + this.yOffset);
 
-            // if(this.theObject === $pushHand){
+            // if(this.theObject === $doubleHandText){
             //     console.log('pre left '+ (this.theObject,midX + this.xSpeed1 * scrollDistance + this.xOffset));
             //     console.log('pre top '+ (midY + this.ySpeed1 * scrollDistance + this.yOffset));
             // }
@@ -324,7 +379,7 @@ function $opacity(element, opacity1){
 
 function $rotate(element, degrees){
     if(element){
-        element.css('transform', 'rotate('+ degrees+')');
+        element.css('transform', 'rotate('+ degrees+'deg)');
     }else{
         console.log('undefined!');
     }
