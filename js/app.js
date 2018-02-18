@@ -19,9 +19,9 @@ $(function(){
     //constructor(startFade, endFade, yOffset, xOffset, theObject){ 
     chainText = new ScrollObject(5900, -1, -0.333, 0, -0.333, 5700, 2060, -200 , 2060, $('#text11'));
     chain = new ScrollObject(5900, -1, -0.333, -1, -0.333, 3790, 2035, 3791, 2035, $('#chain'));
-    pointerHand = new ScrollObject(4200, -1, -0.333, 1, -0.333, 4470, 1415, -3929, 1416, $('#pointer-hand'));
+    pointerHand = new ScrollObject(4200, -1, -0.333, 1, -0.333, 4480, 1415, -3929, 1416, $('#pointer-hand'));
     pointerText = new ScrollObject(4200, -1, -0.333, 0, -0.333, 3869, 1400, -330, 1400, $('#text8'));
-    pushHand = new ScrollObject(1000, 1, 0, -1, 0, -2240, -15, -240, -15, $('#push-hand'));
+    pushHand = new ScrollObject(1000, 1, 0, -1, 0, -2484, 20, -484, 20, $('#push-hand'));
     pushText = new ScrollObject(1000, 1, 0, 0, -0.333, -1325, 22, -325, 355, $('#text6'));
     pinchHand = new ScrollObject(1800, -1, -0.5, 1, 0.5, 2060, 850, -1540, -950, $('#greenHand'));
     pinchText = new ScrollObject(1800, -1, -0.5, 0, -0.333, 1460, 930, -340, 629, $('#text1'));
@@ -61,17 +61,21 @@ function getOffset(distance, speed1, speed2, offset1){
     return distance * (speed1 - speed2) + offset1;
 }
 
+function displayOffsets(element){
+    if(element){
+        console.log('post x: ' + element.getOffsetPostX());
+        console.log('post Y: ' + element.getOffsetPostY());
+
+        //console.log('pre x: ' + blueHand.getOffsetPreX());
+        //console.log('pre Y: ' + blueHand.getOffsetPreY());
+    }
+}
+
 function animate(){
     var distance = $win.scrollTop();
-    // distance = 8999; 
-    
-    // if(jet){
-    //     console.log('post x: ' + jet.getOffsetPostX());
-    //     console.log('post Y: ' + jet.getOffsetPostY());
+    //distance = 4199; 
 
-    //     //console.log('pre x: ' + blueHand.getOffsetPreX());
-    //     //console.log('pre Y: ' + blueHand.getOffsetPreY());
-    // }
+    //displayOffsets(pushHand);
 
     var halfDistance = distance / 2;
     var thirdDistance = distance / 3;
