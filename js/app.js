@@ -2,10 +2,10 @@ var $win = $(window);
 
 var midX = 0;
 var midY = 0;
-var chainText, chain, pointerHand, pointerText, pushHand, pinchHand, blueHand, 
+var chainText, chain, pointerHand, pointerText, pushHand, pinchHand, blueHand, jet, jetText,
     palmHand, orangeLeft, orangeRight, stone, purpleHand, doubleHandLeft, doubleHandText, $stone;
 var text12, text10, text5, text3, text7, pushText, text14, 
-    pinchText, blueText, palmText, orangeText, stoneText;
+    pinchText, blueText, palmText, orangeText, stoneText, footer;
 
 function setCenter(){
     midX = $win.width() / 2;
@@ -32,9 +32,13 @@ $(function(){
     orangeLeft = new ScrollObject(2400, 0, -0.5, -0.333, 0.5, -630, 1290, 169, -1110, $('#orange-left'));
     orangeRight = new ScrollObject(2400, 0, -0.5, 0.333, 0.5, 140, 1290, -659, -1110, $('#orange-right'));
     orangeText = new ScrollObject(2400, 0, -0.5, 0, -0.333, -160, 1368, -160, 967, $('#text4'));
-    purpleHand = new ScrollObject(/*7500*/8300, -0.5, -0.5, -0.5, 0.5, 4190, 4220, 4190, -4080, $('#purple-hand'));
-    doubleHandText = new ScrollObject(/*7500*/8300, -0.5, -0.5, 0, -0.333, 3830, 4190, -320, 2803, $('#text15'));
-    doubleHandLeft = new ScrollObject(/*7500*/8300, -0.5, -0.5, -0.5, 0.5, 3890, 4230, 3890, -4070, $('#double-hand-left'));
+    purpleHand = new ScrollObject(8300, -0.5, -0.5, -0.5, 0.5, 4190, 4220, 4190, -4080, $('#purple-hand'));
+    doubleHandText = new ScrollObject(8300, -0.5, -0.5, 0, -0.333, 3830, 4190, -320, 2803, $('#text15'));
+    doubleHandLeft = new ScrollObject(8300, -0.5, -0.5, -0.5, 0.5, 3890, 4230, 3890, -4070, $('#double-hand-left'));
+    jet = new ScrollObject(9000, 1, 0, 3, 0, -9240, -100, -27240, -100, $('#jet'));
+    jetText = new ScrollObject(9000, 1, 0, 0, -0.333, -9310, 5, -310, 3002, $('#jet-text'));
+    
+    footer = $('#footer');
 
     text14 = new FadeObject(6800, 8000, 330, 2680, $('#text14'));
     text12 = new FadeObject(5600, 6800, 330, 2180, $('#text12'));
@@ -59,11 +63,11 @@ function getOffset(distance, speed1, speed2, offset1){
 
 function animate(){
     var distance = $win.scrollTop();
-    //distance = 8299; 
+    // distance = 8999; 
     
-    //  if(doubleHandLeft){
-    //      console.log('post x: ' + doubleHandLeft.getOffsetPostX());
-    //      console.log('post Y: ' + doubleHandLeft.getOffsetPostY());
+    // if(jet){
+    //     console.log('post x: ' + jet.getOffsetPostX());
+    //     console.log('post Y: ' + jet.getOffsetPostY());
 
     //     //console.log('pre x: ' + blueHand.getOffsetPreX());
     //     //console.log('pre Y: ' + blueHand.getOffsetPreY());
@@ -120,6 +124,8 @@ function animate(){
     purpleHand.update(distance);
     doubleHandText.update(distance);
     doubleHandLeft.update(distance);
+    jet.update(distance);
+    jetText.update(distance);
 
     //stone
     if(distance < 6500){
@@ -135,6 +141,8 @@ function animate(){
     }else if(distance < 8000){
         $source($stone, 'stone_6b.png');
     }
+    
+     $top(footer, midY + -0.333 * distance + 3720);
 }
 
 class ScrollObject{
@@ -156,10 +164,11 @@ class ScrollObject{
             $left(this.theObject, midX + this.xSpeed1 * scrollDistance + this.xOffset);
             $top(this.theObject, midY + this.ySpeed1 * scrollDistance + this.yOffset);
 
-            // if(this.theObject === $doubleHandText){
-            //     console.log('pre left '+ (this.theObject,midX + this.xSpeed1 * scrollDistance + this.xOffset));
-            //     console.log('pre top '+ (midY + this.ySpeed1 * scrollDistance + this.yOffset));
-            // }
+            //if(this.theObject === $doubleHandText){
+            //if(this === jet){
+                //console.log('pre left '+ (this.theObject,midX + this.xSpeed1 * scrollDistance + this.xOffset));
+                //console.log('pre top '+ (midY + this.ySpeed1 * scrollDistance + this.yOffset));
+            //}
         } else {
             $left(this.theObject, midX + this.xSpeed2 * scrollDistance + this.xOffset2);
             $top(this.theObject, midY + this.ySpeed2 * scrollDistance + this.yOffset2);
