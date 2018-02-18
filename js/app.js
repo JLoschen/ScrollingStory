@@ -17,10 +17,10 @@ $(function(){
     setCenter();
     chainText = new ScrollObject(5900, -1, -0.333, 0, -0.333, 5575, 2040, -325 , 2040, $('#chain-text'));
     chain = new ScrollObject(5900, -1, -0.333, -1, -0.333, 3665, 2015, 3665, 2015, $('#chain'));
-    pointerHand = new ScrollObject(4200, -1, -0.333, 1, -0.333, 4480, 1395, -3929, 1396, $('#pointer-hand'));
-    pointerText = new ScrollObject(4200, -1, -0.333, 0, -0.333, 3875, 1380, -325, 1380, $('#pointer-text'));
-    pushHand = new ScrollObject(1000, 1, 0, -1, 0, -2484, 20, -484, 20, $('#push-hand'));
-    pushText = new ScrollObject(1000, 1, 0, 0, -0.333, -1325, 22, -325, 355, $('#push-text'));
+    pushHand = new ScrollObject(4200, -1, -0.333, 1, -0.333, 4480, 1395, -3929, 1396, $('#push-hand'));
+    pushText = new ScrollObject(4200, -1, -0.333, 0, -0.333, 3875, 1380, -325, 1380, $('#push-text'));
+    pointerHand = new ScrollObject(1000, 1, 0, -1, 0, -2484, 20, -484, 20, $('#pointer-hand'));
+    pointerText = new ScrollObject(1000, 1, 0, 0, -0.333, -1325, 22, -325, 355, $('#pointer-text'));
     pinchHand = new ScrollObject(1800, -1, -0.5, 1, 0.5, 2060, 850, -1540, -950, $('#greenHand'));
     pinchText = new ScrollObject(1800, -1, -0.5, 0, -0.333, 1460, 930, -326, 629, $('#pinch-text'));
     blueHand = new ScrollObject(3000, 0, -0.5, 0, 0.333, -100, 1740, -100, -759, $('#blueHand'));
@@ -86,12 +86,15 @@ function animate(){
     //push hand
     if(distance < 1000){
         var percent = distance / 1000;
-        pushText.updateOpacity(percent);
-        pushHand.updateOpacity(percent);
+        pointerText.updateOpacity(percent);
+        pointerHand.updateOpacity(percent);
     } else {
-        pushText.updateOpacity(1);
-        pushHand.updateOpacity(1);
+        pointerText.updateOpacity(1);
+        pointerHand.updateOpacity(1);
     }
+    pointerHand.update(distance);
+    pointerText.update(distance);
+    
     pushHand.update(distance);
     pushText.update(distance);
 
@@ -103,14 +106,13 @@ function animate(){
     fade2.update(distance);
 
     fade3.update(distance);
-    //text10.update(distance);
+    
     fade4.update(distance);
 
     blueText.update(distance);
     blueHand.update(distance);
 
-    pointerHand.update(distance);
-    pointerText.update(distance);
+    
 
     palmText.update(distance);
     palmHand.update(distance);

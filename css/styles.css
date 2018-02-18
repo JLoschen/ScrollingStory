@@ -43,6 +43,7 @@ div img{
 } */
 #scroll-wrapper div{
     position:absolute;
+    /* z-index:0; */
 }
 
 /* #footer .wrapper nav{
