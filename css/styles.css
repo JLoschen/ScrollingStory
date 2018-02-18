@@ -39,14 +39,6 @@ div img{
     position: absolute;
 }
 
-/* #scroll-wrapper .scroll-object{
-    position:absolute;
-} */
 #scroll-wrapper div{
     position:absolute;
-    /* z-index:0; */
 }
-
-/* #footer .wrapper nav{
-    position:absolute
-} */
