@@ -21,7 +21,7 @@ $(function(){
     pushText = new ScrollObject(4200, -1, -0.333, 0, -0.333, 3875, 1380, -325, 1380, $('#push-text'));
     pointerHand = new ScrollObject(1000, 1, 0, -1, 0, -2484, 20, -484, 20, $('#pointer-hand'));
     pointerText = new ScrollObject(1000, 1, 0, 0, -0.333, -1325, 22, -325, 355, $('#pointer-text'));
-    pinchHand = new ScrollObject(1800, -1, -0.5, 1, 0.5, 2060, 850, -1540, -950, $('#greenHand'));
+    pinchHand = new ScrollObject(1800, -1, -0.5, 1, 0.5, 2010, 850, -1590, -950, $('#greenHand'));
     pinchText = new ScrollObject(1800, -1, -0.5, 0, -0.333, 1460, 930, -326, 629, $('#pinch-text'));
     blueHand = new ScrollObject(3000, 0, -0.5, 0, 0.333, -100, 1740, -100, -759, $('#blueHand'));
     blueText = new ScrollObject(3000, 0, -0.5, 0, -0.333, -322, 1750, -322, 1249, $('#blue-hand-text'));
@@ -50,11 +50,6 @@ $(function(){
     stone = new FadeObject(0, 100, 463, 2340, $stone); 
 });
 
-// https://www.youtube.com/watch?v=nhHqiGCG10E
-$win.on('scroll', function(){
-    animate();
-});
-
 function getOffset(distance, speed1, speed2, offset1){
     return distance * (speed1 - speed2) + offset1;
 }
@@ -71,9 +66,9 @@ function displayOffsets(element){
 
 function animate(){
     var distance = $win.scrollTop();
-    //distance = 8999; 
+    // distance = 1799; 
 
-     displayOffsets(jet);
+    //  displayOffsets(pinchHand);
 
     var halfDistance = distance / 2;
     var thirdDistance = distance / 3;
@@ -209,14 +204,12 @@ class ScrollObject{
 
 class FadeObject{
     constructor(startFade, endFade, xOffset, yOffset, theObject){
-        this.ySpeed = 0.333;
         this.startFade = startFade;
         this.endFade = endFade;
         this.xOffset = xOffset;
         this.yOffset = yOffset;
         this.theObject = theObject;
         this.range = endFade - startFade;
-
     }
     update(scrollDistance){
         var third = scrollDistance / 3;
@@ -257,14 +250,6 @@ function $opacity(element, opacity1){
     }
 }
 
-function $rotate(element, degrees){
-    if(element){
-        element.css('transform', 'rotate('+ degrees+'deg)');
-    }else{
-        console.log('undefined!');
-    }
-}
-
 function $source(element, newSource){
     if(element){
         element.attr('src', 'img/Hands/'+newSource);
@@ -275,5 +260,10 @@ function $source(element, newSource){
 
 $win.on('resize', function(){
     setCenter();
+    animate();
+});
+
+// https://www.youtube.com/watch?v=nhHqiGCG10E
+$win.on('scroll', function(){
     animate();
 });

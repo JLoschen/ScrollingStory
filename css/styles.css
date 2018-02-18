@@ -36,6 +36,7 @@ footer nav ul li a{
 
 div img{
     border:0;
+    position: absolute;
 }
 
 /* #scroll-wrapper .scroll-object{
