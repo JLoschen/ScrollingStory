@@ -4,7 +4,7 @@ var midX = 0;
 var midY = 0;
 var chainText, chain, pointerHand, pointerText, pushHand, pinchHand, blueHand, jet, jetText,
     palmHand, orangeLeft, orangeRight, stone, purpleHand, doubleHandLeft, doubleHandText, $stone;
-var text12, text10, text5, text3, text7, pushText, text14, 
+var fade5, fade4, fade3, fade2, fade1, pushText, fade6, 
     pinchText, blueText, palmText, orangeText, stoneText, footer;
 
 function setCenter(){
@@ -15,41 +15,39 @@ function setCenter(){
 $(function(){
     
     setCenter();
-    //constructor(breakPoint, xSpeed1, ySpeed1, xSpeed2, ySpeed2, xOffset, yOffset, xOffset, yOffset)
-    //constructor(startFade, endFade, yOffset, xOffset, theObject){ 
-    chainText = new ScrollObject(5900, -1, -0.333, 0, -0.333, 5700, 2060, -200 , 2060, $('#text11'));
-    chain = new ScrollObject(5900, -1, -0.333, -1, -0.333, 3790, 2035, 3791, 2035, $('#chain'));
-    pointerHand = new ScrollObject(4200, -1, -0.333, 1, -0.333, 4480, 1415, -3929, 1416, $('#pointer-hand'));
-    pointerText = new ScrollObject(4200, -1, -0.333, 0, -0.333, 3869, 1400, -330, 1400, $('#text8'));
+    chainText = new ScrollObject(5900, -1, -0.333, 0, -0.333, 5575, 2040, -325 , 2040, $('#chain-text'));
+    chain = new ScrollObject(5900, -1, -0.333, -1, -0.333, 3665, 2015, 3665, 2015, $('#chain'));
+    pointerHand = new ScrollObject(4200, -1, -0.333, 1, -0.333, 4480, 1395, -3929, 1396, $('#pointer-hand'));
+    pointerText = new ScrollObject(4200, -1, -0.333, 0, -0.333, 3875, 1380, -325, 1380, $('#pointer-text'));
     pushHand = new ScrollObject(1000, 1, 0, -1, 0, -2484, 20, -484, 20, $('#push-hand'));
-    pushText = new ScrollObject(1000, 1, 0, 0, -0.333, -1325, 22, -325, 355, $('#text6'));
+    pushText = new ScrollObject(1000, 1, 0, 0, -0.333, -1325, 22, -325, 355, $('#push-text'));
     pinchHand = new ScrollObject(1800, -1, -0.5, 1, 0.5, 2060, 850, -1540, -950, $('#greenHand'));
-    pinchText = new ScrollObject(1800, -1, -0.5, 0, -0.333, 1460, 930, -340, 629, $('#text1'));
+    pinchText = new ScrollObject(1800, -1, -0.5, 0, -0.333, 1460, 930, -326, 629, $('#pinch-text'));
     blueHand = new ScrollObject(3000, 0, -0.5, 0, 0.333, -100, 1740, -100, -759, $('#blueHand'));
-    blueText = new ScrollObject(3000, 0, -0.5, 0, -0.333, -300, 1750, -300, 1249, $('#text2'));
-    palmHand = new ScrollObject(4800, -0.5, -0.5, 0.5, 0.5, 2270, 2500, -2530, -2300, $('#palm-hand'));
-    palmText = new ScrollObject(4800, -0.5, -0.5, 0, -0.333, 2070, 2420, -330, 1618.4, $('#text9'));
-    orangeLeft = new ScrollObject(2400, 0, -0.5, -0.333, 0.5, -630, 1290, 169, -1110, $('#orange-left'));
-    orangeRight = new ScrollObject(2400, 0, -0.5, 0.333, 0.5, 140, 1290, -659, -1110, $('#orange-right'));
-    orangeText = new ScrollObject(2400, 0, -0.5, 0, -0.333, -160, 1368, -160, 967, $('#text4'));
+    blueText = new ScrollObject(3000, 0, -0.5, 0, -0.333, -322, 1750, -322, 1249, $('#blue-hand-text'));
+    palmHand = new ScrollObject(4800, -0.5, -0.5, 0.5, 0.5, 2270, 2510, -2530, -2290, $('#palm-hand'));
+    palmText = new ScrollObject(4800, -0.5, -0.5, 0, -0.333, 2080, 2430, -320, 1628.4, $('#palm-text'));
+    orangeLeft = new ScrollObject(2400, 0, -0.5, -0.333, 0.5, -780, 1290, 19, -1110, $('#orange-left'));
+    orangeRight = new ScrollObject(2400, 0, -0.5, 0.333, 0.5, -10, 1290, -809, -1110, $('#orange-right'));
+    orangeText = new ScrollObject(2400, 0, -0.5, 0, -0.333, -320, 1360, -320, 959, $('#orange-text'));
     purpleHand = new ScrollObject(8300, -0.5, -0.5, -0.5, 0.5, 4190, 4220, 4190, -4080, $('#purple-hand'));
-    doubleHandText = new ScrollObject(8300, -0.5, -0.5, 0, -0.333, 3830, 4190, -320, 2803, $('#text15'));
+    doubleHandText = new ScrollObject(8300, -0.5, -0.5, 0, -0.333, 3820, 4190, -330, 2803, $('#double-hand-text'));
     doubleHandLeft = new ScrollObject(8300, -0.5, -0.5, -0.5, 0.5, 3890, 4230, 3890, -4070, $('#double-hand-left'));
-    jet = new ScrollObject(9000, 1, 0, 3, 0, -9240, -100, -27240, -100, $('#jet'));
-    jetText = new ScrollObject(9000, 1, 0, 0, -0.333, -9310, 5, -310, 3002, $('#jet-text'));
+    jet = new ScrollObject(9000, 1, 0, 3, 0, -9240, -70, -27240, -70, $('#jet'));
+    jetText = new ScrollObject(9000, 1, 0, 0, -0.333, -9320, 35, -320, 3032, $('#jet-text'));
     
     footer = $('#footer');
 
-    text14 = new FadeObject(6800, 8000, 330, 2680, $('#text14'));
-    text12 = new FadeObject(5600, 6800, 330, 2180, $('#text12'));
-    text10 = new FadeObject(4500, 5500, 330, 1780, $('#text10'));
-    text5 = new FadeObject(2100, 3300, 330, 1080, $('#text5'));
-    text3 = new FadeObject(1300, 2300, 330, 770, $('#text3'));
-    text7 = new FadeObject(1450, 2300, 330, 510, $('#text7'));
-    stoneText = new FadeObject(0, 100, 300, 2500, $('#text13')); 
+    fade6 = new FadeObject(6800, 8000, 330, 2640, $('#fade6'));
+    fade5 = new FadeObject(5600, 6800, 325, 2180, $('#fade5'));
+    fade4 = new FadeObject(4500, 5500, 325, 1780, $('#fade4'));
+    fade3 = new FadeObject(2100, 3300, 325, 1080, $('#fade3'));
+    fade2 = new FadeObject(1300, 2300, 325, 770, $('#fade2'));
+    fade1 = new FadeObject(1450, 2450, 326, 480, $('#fade1'));
+    stoneText = new FadeObject(0, 100, 318, 2450, $('#stone-text')); 
 
     $stone = $('#stone');
-    stone = new FadeObject(0, 100, 445, 2350, $stone); 
+    stone = new FadeObject(0, 100, 463, 2340, $stone); 
 });
 
 // https://www.youtube.com/watch?v=nhHqiGCG10E
@@ -66,16 +64,16 @@ function displayOffsets(element){
         console.log('post x: ' + element.getOffsetPostX());
         console.log('post Y: ' + element.getOffsetPostY());
 
-        //console.log('pre x: ' + blueHand.getOffsetPreX());
-        //console.log('pre Y: ' + blueHand.getOffsetPreY());
+        console.log('pre x: ' + element.getOffsetPreX());
+        console.log('pre Y: ' + element.getOffsetPreY());
     }
 }
 
 function animate(){
     var distance = $win.scrollTop();
-    //distance = 4199; 
+    //distance = 8999; 
 
-    //displayOffsets(pushHand);
+     displayOffsets(jet);
 
     var halfDistance = distance / 2;
     var thirdDistance = distance / 3;
@@ -100,11 +98,13 @@ function animate(){
     pinchText.update(distance);
     pinchHand.update(distance);
 
-    text7.update(distance);
+    fade1.update(distance);
 
-    text3.update(distance);
+    fade2.update(distance);
 
-    text5.update(distance);
+    fade3.update(distance);
+    //text10.update(distance);
+    fade4.update(distance);
 
     blueText.update(distance);
     blueHand.update(distance);
@@ -114,13 +114,13 @@ function animate(){
 
     palmText.update(distance);
     palmHand.update(distance);
-    text10.update(distance);
+    
 
     chain.update(distance);
     chainText.update(distance);
 
-    text12.update(distance);
-    text14.update(distance);
+    fade5.update(distance);
+    fade6.update(distance);
     
     stoneText.update(distance);
     stone.update(distance);
@@ -146,7 +146,7 @@ function animate(){
         $source($stone, 'stone_6b.png');
     }
     
-     $top(footer, midY + -0.333 * distance + 3720);
+     $top(footer, midY + -0.333 * distance + 3630);
 }
 
 class ScrollObject{

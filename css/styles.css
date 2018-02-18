@@ -8,12 +8,13 @@ footer{
     background-color: #222;
     padding: -100px;
     height: 100px;
-    border-radius: 10px;
+    position:absolute;
 }
 
-.wrapper {
+ #footer .wrapper {
 	display: table;   /* Allow the centering to work */
-	margin: 0 auto;
+    margin: 0 auto;
+    position:relative;
 }
 
 footer nav ul{
@@ -32,3 +33,18 @@ footer nav ul li a{
     font-size: 14px;
     color: white;
 }
+
+div img{
+    border:0;
+}
+
+/* #scroll-wrapper .scroll-object{
+    position:absolute;
+} */
+#scroll-wrapper div{
+    position:absolute;
+}
+
+/* #footer .wrapper nav{
+    position:absolute
+} */
